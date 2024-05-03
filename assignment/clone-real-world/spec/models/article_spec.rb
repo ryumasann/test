@@ -5,12 +5,21 @@ RSpec.describe Article, type: :model do
 
   describe 'create' do
     # FactoryBotを使ってbookを作成
-    let(:book) { FactoryBot.build(:book) }
+    let(:article) { FactoryBot.build(:article) }
 
     # まずは正しいデータが作成されるかをテスト
     context 'with valid attributes' do
-      it 'is valid with a title and author' do
-        expect(book).to be_valid
+      it 'is valid with a title' do
+        expect(article).to be_valid
+      end
+    end
+
+    # 異常系のテスト
+    context 'with invalid attributes' do
+      # titleがない場合のテスト
+      it 'is invalid without a title' do
+        article.title = nil
+        expect(article.invalid?).to eq false
       end
     end
   end
